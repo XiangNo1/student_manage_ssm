@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.situ.ssm.dao.StudentDao">
+
+
+	<select id="findBanjiKechengPageBeanListSearch" resultMap="findBanjiKechengPageBeanList">
+		SELECT banji.name AS banji_name,kecheng.name AS kecheng_name,kecheng.credit AS kecheng_credit,banji_kecheng.banji_id,banji_kecheng.kecheng_id FROM banji LEFT JOIN banji_kecheng ON banji.id=banji_kecheng.banji_id LEFT JOIN kecheng ON banji_kecheng.kecheng_id=kecheng.id where banji.id=#{banji_id}
+	</select>
+
+	<delete id="deleteBanjiKecheng">
+		DELETE FROM banji_kecheng WHERE banji_id=#{banji_id} AND kecheng_id=#{kecheng_id}
+	</delete>
+
+	<resultMap type="Banji" id="findBanjiKechengPageBeanList">
+		<result property="id" column="banji_id"/>
+		<result property="name" column="banji_name"/>
+		<collection property="list" ofType="Kecheng">
+				<result property="id" column="kecheng_id"/>
+				<result property="name" column="kecheng_name"/>
+				<result property="credit" column="kecheng_credit"/>
+		</collection>
+	</resultMap>
+
+	<select id="findBanjiKechengPageBeanList" resultMap="findBanjiKechengPageBeanList">
+		SELECT banji.name AS banji_name,kecheng.name AS kecheng_name,kecheng.credit AS kecheng_credit,banji_kecheng.banji_id,banji_kecheng.kecheng_id FROM banji LEFT JOIN banji_kecheng ON banji.id=banji_kecheng.banji_id LEFT JOIN kecheng ON banji_kecheng.kecheng_id=kecheng.id
+	</select>
+
+	<insert id="addBanjiKecheng">
+			insert into banji_kecheng values(#{banji_id},#{kecheng_id})
+	</insert>
+
+	<resultMap type="Student" id="findStudentBanjiKechengPageBeanListSearch">
+		<result property="id" column="student_id"/>
+		<result property="name" column="student_name"/>
+		<association property="banji" javaType="Banji">
+			<result property="name" column="banji_name"/>
+			<collection property="list" ofType="Kecheng">
+					<result property="name" column="kecheng_name"/>
+					<result property="credit" column="kecheng_credit"/>
+			</collection>
+		</association>		
+	</resultMap>
+	
+	<select id="findStudentBanjiKechengPageBeanListSearch" parameterType="Integer" resultMap="findStudentBanjiKechengPageBeanListSearch">
+		SELECT student.id as student_id,student.name AS student_name,banji.NAME AS banji_name,kecheng.name AS kecheng_name,kecheng.credit AS kecheng_credit  FROM student LEFT JOIN banji ON student.banji_id=banji.id LEFT JOIN banji_kecheng ON banji.id=banji_kecheng.banji_id LEFT JOIN kecheng ON banji_kecheng.kecheng_id=kecheng.id where student.id=#{id}
+	</select>
+
+
+	<resultMap type="Student" id="findStudentBanjiKechengPageBeanList1">
+		<result property="id" column="student_id"/>
+		<result property="name" column="student_name"/>
+		<association property="banji" javaType="Banji">
+			<result property="name" column="banji_name"/>
+			<collection property="list" ofType="Kecheng">
+					<result property="name" column="kecheng_name"/>
+					<result property="credit" column="kecheng_credit"/>
+			</collection>
+		</association>		
+	</resultMap>
+
+	<resultMap type="Student" id="findStudentBanjiKecheng1">
+		<result property="id" column="student_id"/>
+		<result property="name" column="student_name"/>
+		<association property="banji" javaType="Banji">
+			<result property="name" column="banji_name"/>
+			<collection property="list" ofType="Kecheng">
+					<result property="name" column="kecheng_name"/>
+					<result property="credit" column="kecheng_credit"/>
+			</collection>
+		</association>		
+	</resultMap>
+	
+	<select id="findStudentBanjiKechengPageBeanList" resultMap="findStudentBanjiKechengPageBeanList1">
+		SELECT student.id as student_id,student.name AS student_name,banji.NAME AS banji_name,kecheng.name AS kecheng_name,kecheng.credit AS kecheng_credit  FROM student LEFT JOIN banji ON student.banji_id=banji.id LEFT JOIN banji_kecheng ON banji.id=banji_kecheng.banji_id LEFT JOIN kecheng ON banji_kecheng.kecheng_id=kecheng.id
+	</select>
+	
+	<select id="findStudentBanjiKecheng" resultMap="findStudentBanjiKecheng1">
+		SELECT student.id as student_id,student.name AS student_name,banji.NAME AS banji_name,kecheng.name AS kecheng_name,kecheng.credit AS kecheng_credit  FROM student LEFT JOIN banji ON student.banji_id=banji.id LEFT JOIN banji_kecheng ON banji.id=banji_kecheng.banji_id LEFT JOIN kecheng ON banji_kecheng.kecheng_id=kecheng.id
+	</select>
+
+	<select id="findAllStudent" resultType="Student">
+		select * from student
+	</select>
+
+	<select id="checkKechengName" parameterType="String" resultType="Kecheng">
+		SELECT id,name,credit FROM kecheng where name=#{name}
+	</select>
+
+	<update id="updateKecheng" parameterType="Kecheng">
+		update kecheng set name=#{name},credit=#{credit} where id=#{id} 
+	</update>
+
+	<select id="findKechengById" parameterType="Integer" resultType="Kecheng">
+		select * from kecheng where id=#{id}
+	</select>
+
+	<delete id="deleteKecheng" parameterType="Integer">
+		delete from kecheng where id=#{id}
+	</delete>
+
+	<insert id="addKecheng" parameterType="Kecheng">
+		INSERT INTO kecheng(NAME,credit) VALUES(#{name},#{credit})
+	</insert>
+
+	<select id="findKechengPageBeanList" resultType="Kecheng">
+		select * from kecheng limit #{index},#{pageSize}
+	</select>
+
+	<select id="findKecheng" resultType="Kecheng">
+	select * from kecheng		
+	</select>
+
+	<update id="updateBanji" parameterType="Banji">
+		update banji set name=#{name} where id=#{id}
+	</update>
+	
+	<select id="findBanjiById" parameterType="Integer" resultType="Banji">
+		select id,name from banji where id=#{id}
+	</select>
+
+	<select id="checkBanjiName" parameterType="String" resultType="Banji">
+		SELECT id,name FROM banji where name=#{name}
+	</select>
+
+	<insert id="addBanji" parameterType="Banji">
+		insert into banji(name) values(#{name})
+	</insert>
+
+	<delete id="deleteBanji" parameterType="Integer">
+		delete from banji where id=#{id}
+	</delete>
+
+	<select id="findBanjiPageBeanList" resultType="Banji">
+		select id,name from banji limit #{index},#{pageSize}
+	</select>
+
+   <resultMap type="Student" id="findById">
+     	<result property="id" column="id"/>
+     	<result property="name" column="student_name"/>
+     	<result property="age" column="age"/>
+     	<result property="gender" column="gender"/>
+     	<result property="address" column="address"/>
+     	<result property="birthday" column="birthday"/>
+     	<association property="banji" javaType="Banji">
+     	<result property="id" column="banji_id"/>
+     		<result property="name" column="banji_name"/>
+     	</association>
+     </resultMap>
+    <select id="findById" parameterType="Integer" resultMap="findById">
+		SELECT student.id AS id,student.name AS student_name,student.age AS age,student.gender AS gender,student.address AS address,student.birthday AS birthday,banji.id as banji_id,banji.name AS banji_name FROM student LEFT JOIN banji ON student.banji_id=banji.id WHERE student.id=#{id}
+	</select>
+     
+     
+     <update id="updateStudent" parameterType="Student">
+		UPDATE student SET name=#{name},age=#{age},gender=#{gender},address=#{address},birthday=#{birthday},banji_id=#{banji_id} WHERE id=#{id}
+	</update>
+
+	<select id="checkStudentName" parameterType="String" resultType="Student">
+		SELECT id,name,age,gender,address,birthday FROM student where name=#{name}
+	</select>
+
+	<delete id="deleteStudentById" parameterType="Integer">
+		DELETE FROM student WHERE id=#{id}
+	</delete>
+
+	<insert id="addStudent" parameterType="Student">
+		INSERT INTO student(NAME,age,gender,address,birthday,banji_id) VALUES(#{name},#{age},#{gender},#{address},#{birthday},#{banji_id})
+	</insert>
+
+	<select id="findBanji" resultType="Banji">
+		select * from banji
+	</select>
+
+    <select id="findAccountsByName" parameterType="String" resultType="Accounts" >
+       select * from Accounts where name = #{name}
+    </select>
+    
+    <select id="getSearchStudentCount" resultType="Integer">
+    	select count(*) from student
+    	<where>
+       <if test="name!=null and !&quot;&quot;.equals(name.trim())">
+           and name like '%${name}%'
+       </if>
+       <if test="age!=null and !&quot;&quot;.equals(age.trim())">
+           and age = #{age}
+       </if>
+       <if test="gender!=null and !&quot;&quot;.equals(gender.trim())">
+           and gender = #{gender}
+       </if>
+       <if test="address!=null and !&quot;&quot;.equals(address.trim())">
+           and address = #{address}
+       </if>
+       <if test="banji!=null and !&quot;&quot;.equals(banji.trim())">
+           and banji = #{banji}
+       </if>
+    </where>
+    </select>
+    
+    
+     <resultMap type="Student" id="findSearchStudentList">
+     	<result property="id" column="id"/>
+     	<result property="name" column="student_name"/>
+     	<result property="age" column="age"/>
+     	<result property="gender" column="gender"/>
+     	<result property="address" column="address"/>
+     	<result property="birthday" column="birthday"/>
+     	<association property="banji" javaType="Banji">
+     		<result property="name" column="banji_name"/>
+     	</association>
+     </resultMap>
+    
+     <select id="findSearchStudentList" resultMap="findSearchStudentList">
+    	select student.id as id,student.name as student_name,student.age as age,student.gender as gender,student.address as address,student.birthday as birthday,banji.name as banji_name from student left join banji on student.banji_id=banji.id 
+    	<where>
+       <if test="searchCondition.name!=null and !&quot;&quot;.equals(searchCondition.name.trim())">
+           and student.name like '%${searchCondition.name}%'
+       </if>
+       <if test="searchCondition.age!=null and !&quot;&quot;.equals(searchCondition.age.trim())">
+           and age = #{searchCondition.age}
+       </if>
+       <if test="searchCondition.gender!=null and !&quot;&quot;.equals(searchCondition.gender.trim())">
+           and gender = #{searchCondition.gender}
+       </if>
+       <if test="searchCondition.address!=null and !&quot;&quot;.equals(searchCondition.address.trim())">
+           and address = #{searchCondition.address}
+       </if>
+       <if test="searchCondition.banji!=null and !&quot;&quot;.equals(searchCondition.banji.trim())">
+           and banji.name = #{searchCondition.banji}
+       </if>
+    </where>
+       limit #{index},#{searchCondition.pageSize}
+    </select>
+</mapper>
