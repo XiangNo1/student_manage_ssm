@@ -58,14 +58,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
   	<url-pattern>/checkImgServlet</url-pattern>
   </servlet-mapping>
   
-  <servlet>
-  	<servlet-name>LoginServlet</servlet-name>
-  	<servlet-class>com.situ.ssm.controller.LoginServlet</servlet-class>
-  </servlet>
+ 
   
-  <servlet-mapping>
-  	<servlet-name>LoginServlet</servlet-name>
-  	<!-- 网名，以/开头 -->
-  	<url-pattern>/login</url-pattern>
-  </servlet-mapping>
 </web-app>

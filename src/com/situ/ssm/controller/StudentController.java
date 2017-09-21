@@ -7,13 +7,17 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.annotation.JsonFormat.Value;
+import com.situ.ssm.pojo.Accounts;
 import com.situ.ssm.pojo.Banji;
 import com.situ.ssm.pojo.Student;
 import com.situ.ssm.service.IStudentService;
@@ -26,6 +30,67 @@ public class StudentController {
     @Resource(name="studentService")
     private IStudentService studentService;
     //入口
+    @RequestMapping(value="/loginout")
+    protected void loginout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		HttpSession session = req.getSession(false);
+		if (session != null) {
+			session.removeAttribute("userName");
+			session.removeAttribute("accounts");
+		}
+		resp.sendRedirect(req.getContextPath() + "/html/login.html");
+	}
+    
+    @RequestMapping(value="/login")
+    public void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		req.setCharacterEncoding("utf-8");
+		
+		String checkCode = req.getParameter("checkCode");
+		String checkCodeSession = (String) req.getSession().getAttribute("checkCodeSession");
+		if (checkCode == null || checkCode.equals("")) {
+			resp.sendRedirect(req.getContextPath() + "/html/login.html");
+			return;
+		}
+		if (!checkCode.equalsIgnoreCase(checkCodeSession)) {
+			resp.sendRedirect(req.getContextPath() + "/html/login.html");
+			return;
+		}
+		
+		
+		
+		String name = req.getParameter("name");
+		String password = req.getParameter("password");
+		List<Accounts> list = studentService.findAccountsByName(name);
+		System.out.println(list);
+		String name2 = null;
+		String password2 = null;
+		for (Accounts accounts : list) {
+			System.out.println(accounts.getName());
+			System.out.println(accounts.getPassword());
+			if (name.equals(accounts.getName()) && password.equals(accounts.getPassword())) {
+				name2 = accounts.getName();
+				password2 = accounts.getPassword();
+				
+			}
+		}
+		if(name2 != null){
+			HttpSession session = req.getSession();
+			//List<Accounts> onlineStudentList = (List<Accounts>) getServletContext().getAttribute("onlineStudentList");
+			Accounts accounts = new Accounts(name2, password2);
+			session.setAttribute("userName", name2);
+			session.setAttribute("accounts", accounts);
+			System.out.println(accounts);
+			//onlineStudentList.add(accounts);
+			System.out.println("LoginServlet.service() 登录页面" );
+			//System.out.println(onlineStudentList);
+			resp.sendRedirect(req.getContextPath() + "/student/searchByCondition.action");
+		}
+		else{
+			resp.sendRedirect(req.getContextPath() + "/html/login.html");
+		}
+	}
+    
     @RequestMapping(value="/updateStudent2")
 	public String updateStudent2(Integer id, String name, Integer age, String gender, String address, Integer banji, String birthday){
 		SimpleDateFormat simpleDateFormat =new SimpleDateFormat("yyyy-MM-dd");

@@ -45,15 +45,15 @@
       
       <ul class="nav navbar-nav navbar-right">
       
-        <li><a href="${pageContext.request.contextPath }/logout"> 退出登陆</a></li>
+        <li><a href="${pageContext.request.contextPath }/student/loginout.action"> 退出登陆</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
-          <ul class="dropdown-menu">
+           <ul class="dropdown-menu">
+          			<li><a href="#">帐号： ${accounts.name }   密码:  ${accounts.password }</a></li>
           
-          <c:forEach items="${onlineStudentList }" var="accounts">
-			<li><a href="#">${accounts.name } :  ${accounts.password }</a></li>
-		</c:forEach>
-		
+          <%-- <c:forEach items="${onlineStudentList }" var="accounts">
+			<li><a href="#">帐号： ${accounts.name }   密码:  ${accounts.password }</a></li>
+		  </c:forEach> --%>
           </ul>
         </li>
         
