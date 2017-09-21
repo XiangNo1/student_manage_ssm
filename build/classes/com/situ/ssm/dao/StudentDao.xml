@@ -5,7 +5,22 @@
 <mapper namespace="com.situ.ssm.dao.StudentDao">
 
 
-	<select id="findBanjiKechengPageBeanListSearch" resultMap="findBanjiKechengPageBeanList">
+	<select id="findBanjiStudentPageBeanListSearch" parameterType="Integer" resultMap="findBanjiStudentPageBeanList">
+		SELECT banji.name as banji_name,student.name as student_name FROM banji LEFT JOIN student ON banji.id=student.banji_id where banji_id=#{banji_id}
+	</select>
+
+	<resultMap type="Banji" id="findBanjiStudentPageBeanList">
+		<result property="name" column="banji_name"/>
+		<collection property="studentList" ofType="Student">
+				<result property="name" column="student_name"/>
+		</collection>
+	</resultMap>
+
+	<select id="findBanjiStudentPageBeanList" resultMap="findBanjiStudentPageBeanList">
+		SELECT banji.name as banji_name,student.name as student_name FROM banji LEFT JOIN student ON banji.id=student.banji_id
+	</select>
+
+	<select id="findBanjiKechengPageBeanListSearch" parameterType="Integer" resultMap="findBanjiKechengPageBeanList">
 		SELECT banji.name AS banji_name,kecheng.name AS kecheng_name,kecheng.credit AS kecheng_credit,banji_kecheng.banji_id,banji_kecheng.kecheng_id FROM banji LEFT JOIN banji_kecheng ON banji.id=banji_kecheng.banji_id LEFT JOIN kecheng ON banji_kecheng.kecheng_id=kecheng.id where banji.id=#{banji_id}
 	</select>
 

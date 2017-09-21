@@ -67,4 +67,8 @@ public interface IStudentService {
 	void deleteBanjiKecheng(Integer banji_id, Integer kecheng_id);
 
 	PageBean getPageBeanBanjiKechengSearch(int pageIndex, int pageSize, Integer banjiSearch);
+
+	PageBean getPageBeanBanjiStudent(int pageIndex1, int pageSize1);
+
+	PageBean getPageBeanBanjiStudentSearch(int pageIndex, int pageSize, Integer banjiSearch);
 }

@@ -71,6 +71,10 @@ public interface StudentDao {
 
 	List<Banji> findBanjiKechengPageBeanListSearch(Integer banji_id);
 
+	List<Banji> findBanjiStudentPageBeanList(int index, int pageSize);
+
+	List<Banji> findBanjiStudentPageBeanListSearch(Integer banji_id);
+
 
 	
 }

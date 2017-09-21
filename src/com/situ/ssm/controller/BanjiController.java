@@ -25,7 +25,8 @@ public class BanjiController {
 	@Resource(name="studentService")
     private IStudentService studentService;
 	
-	/*@RequestMapping(value="/searchBanjiStudent")
+	
+	@RequestMapping(value="/searchBanjiStudent")
 	public ModelAndView searchBanjiStudent(Integer banjiSearch, ModelAndView modelAndView, String pageIndex, String pageSize){
 		if (banjiSearch == null) {
 			modelAndView.setViewName("redirect:/banji/findBanjiStudent.action");
@@ -62,12 +63,12 @@ public class BanjiController {
 		PageBean pageBean = studentService.getPageBeanBanjiStudent(pageIndex1,pageSize1);
 		System.out.println(pageBean);
 		modelAndView.addObject("list", pageBean);
-		List<Banji> list = studentService.findAllBanji();
+		List<Banji> list = studentService.findBanji();
 		modelAndView.addObject("banjiList", list);
 		modelAndView.setViewName("findBanjiStudentJsp");
 		return modelAndView;
 	}
-	*/
+	
 	@RequestMapping(value="/searchBanjiKecheng")
 	public ModelAndView searchBanjiKecheng(Integer banjiSearch, ModelAndView modelAndView, String pageIndex, String pageSize){
 		if (banjiSearch == null) {

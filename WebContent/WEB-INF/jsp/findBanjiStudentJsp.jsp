@@ -110,16 +110,18 @@
 		            	<td>班级名称</td>
 		            	<td>学生名称</td>
 		            </tr>
-		                <c:forEach items="${requestScope.list.list }" var="student">
+		                <c:forEach items="${requestScope.list.list }" var="banji">
+		                <c:forEach items="${banji.studentList}" var="student">
 				            <tr>
-				               		<td>${student['banji_name'] }</td>
-				                	<td>${student['student_name'] }</td>
+				               		<td>${banji.name }</td>
+				                	<td>${student.name}</td>
 				            </tr>
+				            </c:forEach>
 		                </c:forEach>
 		            </table>
 		      </div>
 		      </div>
-		      
+		      <%-- 
 		       <!-- 分页开始 -->
 				<nav aria-label="Page navigation" class="pull-right">
 				 <ul class="pagination">
@@ -170,7 +172,7 @@
 			  </ul>
 				</nav>
 				<!-- 分页结束 -->
-		     
+		      --%>
 		
 	<script>
 	

@@ -8,7 +8,20 @@ public class Banji implements Serializable{
 	private Integer id;
 	private String name;
 	private List<Kecheng> list;
-	
+	private List<Student> studentList;
+	public Banji(Integer id, String name, List<Kecheng> list, List<Student> studentList) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.list = list;
+		this.studentList = studentList;
+	}
+	public List<Student> getStudentList() {
+		return studentList;
+	}
+	public void setStudentList(List<Student> studentList) {
+		this.studentList = studentList;
+	}
 	public Banji() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -48,8 +61,9 @@ public class Banji implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Banji [id=" + id + ", name=" + name + ", list=" + list + "]";
+		return "Banji [id=" + id + ", name=" + name + ", list=" + list + ", studentList=" + studentList + "]";
 	}
+	
 	
 	
 }
