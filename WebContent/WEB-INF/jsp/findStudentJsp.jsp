@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.*"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -129,7 +130,9 @@
 										<td>${student.age }</td>
 										<td>${student.gender}</td>
 										<td>${student.address}</td>
-										<td>${student.birthday }</td>
+										<td>
+										<fmt:formatDate value="${student.birthday }" pattern="yyyy-MM-dd"/>
+										</td>
 										<td>${student.banji.name }</td>
 										<td><a href="javascript:delStudent(${student.id });">删除</a></td>
 										<td><a href="${pageContext.request.contextPath }/student/updateStudent.action?id=${student.id}">修改</a></td>

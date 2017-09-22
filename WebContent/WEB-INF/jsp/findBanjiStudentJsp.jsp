@@ -121,7 +121,8 @@
 		            </table>
 		      </div>
 		      </div>
-		      <%-- 
+		      
+		      
 		       <!-- 分页开始 -->
 				<nav aria-label="Page navigation" class="pull-right">
 				 <ul class="pagination">
@@ -172,7 +173,7 @@
 			  </ul>
 				</nav>
 				<!-- 分页结束 -->
-		      --%>
+		      
 		
 	<script>
 	
