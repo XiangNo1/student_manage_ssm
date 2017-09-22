@@ -57,6 +57,9 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
   	<url-pattern>/checkImgServlet</url-pattern>
   </servlet-mapping>
   
+  
+  
+  <!--  下面的这个配置是restful 测试。跟学生管理系统没有半毛钱的关系  -->
  <servlet>
         <servlet-name>springmvc_restful</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -75,6 +78,9 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
          -->
        <url-pattern>/</url-pattern>
     </servlet-mapping>
+ 
+ 
+ 
  
    <filter>
     <filter-name>LoginFilter</filter-name>

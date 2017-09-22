@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.situ.ssm.pojo.Student;
 import com.situ.ssm.service.IStudentService;
-
+/*
+ * 加了restful的例子
+ * 可以忽略掉这一层，跟学生管理系统没有半毛钱的关系
+ */
 @Controller
 public class StudentRestfulController {
     

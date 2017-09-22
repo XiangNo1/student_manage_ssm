@@ -79,6 +79,7 @@
   </head>
  
   <body>
+  <!-- json测试。跟学生管理系统没有半毛钱的关系 --> 
     <input type="button" onclick="requestJson()" value="请求json，返回json"/><br/>
     <input type="button" onclick="responseEntity()" value="返回json对象"/><br/>
     <input type="button" onclick="responseList()" value="返回json List"/><br/>
