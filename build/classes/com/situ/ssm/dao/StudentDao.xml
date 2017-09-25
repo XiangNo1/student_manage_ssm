@@ -157,7 +157,7 @@
      	<result property="age" column="age"/>
      	<result property="gender" column="gender"/>
      	<result property="address" column="address"/>
-     	<result property="birthday" column="birthday"/>
+     	<result property="birthday" column="birthday" javaType="java.sql.Date" jdbcType="DATE"/>
      	<association property="banji" javaType="Banji">
      	<result property="id" column="banji_id"/>
      		<result property="name" column="banji_name"/>
@@ -220,7 +220,7 @@
      	<result property="age" column="age"/>
      	<result property="gender" column="gender"/>
      	<result property="address" column="address"/>
-     	<result property="birthday" column="birthday"/>
+     	<result property="birthday" column="birthday" javaType="java.sql.Date" jdbcType="DATE"/>
      	<association property="banji" javaType="Banji">
      		<result property="name" column="banji_name"/>
      	</association>

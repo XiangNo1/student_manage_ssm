@@ -12,11 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.annotation.JsonFormat.Value;
 import com.situ.ssm.pojo.Accounts;
 import com.situ.ssm.pojo.Banji;
 import com.situ.ssm.pojo.Student;
@@ -29,6 +31,15 @@ import com.situ.ssm.vo.SearchCondition;
 public class StudentController {
     @Resource(name="studentService")
     private IStudentService studentService;
+    
+    @InitBinder
+	protected void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(
+                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"), true));
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(
+                new SimpleDateFormat("yyyy-MM-dd"), true));
+    }
+
     //入口
     @RequestMapping(value="/loginout")
     protected void loginout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
