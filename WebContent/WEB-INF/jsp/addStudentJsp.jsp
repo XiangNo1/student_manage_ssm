@@ -9,8 +9,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/lib/bootstrap/css/bootstrap.css" />
 		<script type="text/javascript" src="${pageContext.request.contextPath }/lib/jquery/jquery-1.11.1.js"></script>
 				<script type="text/javascript" src="${pageContext.request.contextPath }/lib/bootstrap/js/bootstrap.js"></script>
+				<script type="text/javascript" src="${pageContext.request.contextPath }/lib/jquery.form.js"></script>
 
-</script>
 </head>
 <body>
 		<div class="container-fluid">
@@ -82,7 +82,7 @@
 		            </ul>
 				   <div style="width:60%; margin-top:20px;">
 		            <div class="alert alert-danger" role="alert">请注意不要添加重复的姓名的学生！！！</div>
- <form action="${pageContext.request.contextPath}/student/addStudent2.action" method="post">
+ <form action="${pageContext.request.contextPath}/student/addStudent2.action" enctype="multipart/form-data" class="form form-horizontal" id="form-add" method="post">
    	    姓名：<input class="form-control" type="text" name="name" id="name"/><br/>
    	    <span id="nameInfo"></span><br/>
   	     年龄：<input class="form-control" type="text" name="age"/><br/>
@@ -95,6 +95,14 @@
 					               
 					       </c:forEach>        
 					           	</select>
+					           	
+				<div>
+           <img alt="" id="imgId" src="" width=100 height=100>
+           <input type="hidden" name="mainImage" id="mainImage"/>
+           <input type="file" name="pictureFile" onchange="uploadPic();"/>
+            <p><button class="btn btn-primary" type="submit">上传</button></p>
+       </div>
+       	           	
        <p><button class="btn btn-primary" type="submit">保存</button></p>
     </form>
 </div>
@@ -123,6 +131,23 @@ $(function() {
 		);
 	});
 });
+
+
+
+function uploadPic() {
+   //定义参数
+   var options = {
+       url:"${pageContext.request.contextPath}/upload/uploadPic.action",
+       dataType:"json",
+       type:"post",
+       success: function(data) {
+           $("#imgId").attr("src","/pic/" + data.fileName);
+           $("#mainImage").val(data.fileName);
+       }
+   };
+    $("#form-add").ajaxSubmit(options);
+}
+
 </script>
 		
 	</body>
