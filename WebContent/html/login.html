@@ -9,7 +9,10 @@
 
 </head>
 <body>
-<div style="width:30%; margin-top:150px;" class="container">
+	<div style="margin-left: 100px; margin-top: 40px;">
+		<p style="color: red; font-size: 58px;">欢迎进入学生管理系统</p>
+	</div>
+<div style="width:30%; margin-top:100px;" class="container">
 	<form action="/Java1707SSM/student/login.action" method = "post">
 		用户名：<input  class="form-control" placeholder="请输入帐号" type="text" name="name"/><br/>
 		密 码 : <input  class="form-control" placeholder="请输入密码" type="text" name="password"/><br/>
@@ -17,8 +20,6 @@
 		<img id="codeImg" src="/Java1707SSM/checkImgServlet" onclick="refreshCode()"/>
 		
 		<input class="btn btn-primary" type="submit" value="登录"/>
-		<a href="/Java1707SSM/jsp/zhuce.jsp">注册账号</a>
-		<a href="/Java1707SSM/student?method=findAccounts">管理员登录</a>
 	</form>
 </div>
 
